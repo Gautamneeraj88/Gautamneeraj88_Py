@@ -3,12 +3,16 @@
 Use a variable of dictionary type to maintain the count.
 """
 all_freq = {}
+
+
 def frequency(sentence):
     for i in sentence:
         if i in all_freq:
             all_freq[i] += 1
         else:
             all_freq[i] = 1
+    del all_freq[' ']
+
 
 sentence = input("Enter your sentence: \n")
 frequency(sentence)
