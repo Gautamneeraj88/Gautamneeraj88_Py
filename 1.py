@@ -4,26 +4,33 @@ the triangle as the input from the user using input function and return the area
 and perimeter of the triangle as a tuple. Also, assert that sum of the length of any
 two sides is greater than the third side.
 """
-def triangle(a, b, c):
-    s = (a+b+c)/2
-    area = (s*(s-a)*(s-b)*(s-c))**0.5
-    perimeter = 2*s
-    t = (perimeter, area)
-    return t
-
-def triangle_check(a, b, c):
-    if ((a+b) > c):
-         print("a + b > C ", a+b, " > ", c)
-    if ((a+c) > b):
-        print("a + c > b ", a+c, " > ", b)
-    if ((b + c) > a):
-        print("b + c > a ", b+c, " > ", a)
+import math
 
 
-a = float(input("Enter triangle side1: "))
-b = float(input("Enter triangle side2: "))
-c = float(input("Enter triangle side3: "))
+def areaTriangle():
+    '''
+    Calculates the Area of a Triangle using Heron's Formula
+    and its Perimeter and returns as them as a Tuple
+    '''
+    side1 = int(input('Enter Side 1: '))
+    side2 = int(input('Enter Side 2: '))
+    side3 = int(input('Enter Side 3: '))
+    assert side1 + side2 > side3 and side1 + \
+        side3 > side2 and side2 + side3 > side1, 'invalid sides'
+    semiPerimeter = (side1 + side2 + side3) / 2
+    return (math.sqrt(semiPerimeter *
+                      (semiPerimeter - side1) *
+                      (semiPerimeter - side2) *
+                      (semiPerimeter - side3)),
+            side1 + side2 + side3)
 
-print("Primeter and area of the triangle: ", triangle(a, b, c))
 
-triangle_check(a, b, c)
+def main():
+    area, perimeter = areaTriangle()
+    if area:
+        print('Area of Triangle:', area, 'sq units')
+        print('Perimeter of Triangle:', perimeter, 'units')
+
+
+if __name__ == '__main__':
+    main()
