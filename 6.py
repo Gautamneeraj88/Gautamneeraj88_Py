@@ -22,12 +22,3 @@ print("Concatenated tuple is: ", t4)
 
 print("Maximum number is: ",max(t4))
 print("Minimum number is: ",min(t4))
-
-maximum = t4[0]
-minimum = t4[0]
-for i in range(1, len(t4), 1):
-    if (t4[i] > maximum):
-        maximum = t4[i]
-    if (t4[i] < minimum):
-        minimum = t4[i]
-print("Maximum :", max, "\tMinimum :", min)

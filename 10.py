@@ -11,7 +11,7 @@ def frequency(sentence):
             all_freq[i] += 1
         else:
             all_freq[i] = 1
-    del all_freq[' ']
+   #del all_freq[' ']
 
 
 sentence = input("Enter your sentence: \n")

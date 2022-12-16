@@ -1,53 +1,58 @@
+# importing required modules
 import matplotlib.pyplot as plt
 import numpy as np
-def plotting(x,y,deg,a,b,diff):
-    z=[0 for i in range(0,360,1)]
-    Angles=[i for i in range(0,360,1)]
-    angles=[i*(np.pi/180) for i in range(0,360,1)]
-    plt.plot(Angles,z,color="black")
-    plt.plot(Angles,np.sin(angles),label="Sine Curve")
-    plt.plot(Angles,np.cos(angles),label="Cosine curve")
-    plt.xlabel("Angles in degree")
-    plt.ylabel("Trigonometric values")
-    plt.legend()
-    plt.show()
-    curve=np.polyfit(x,y,deg)
-    graph=np.poly1d(curve)
-    new_x=list()
-    new_y=list()
-    for i in range(len(x)):
-        new_x.append(x[i])
-        curl=graph(x[i])
-        new_y.append(curl)
-    plt.plot(new_x,new_y,label="y = "+str(graph))
-    plt.xlabel("Values of x")
-    plt.ylabel("Values of y")
-    plt.legend()
-    plt.show()
-    val=np.arange(a,b,diff)
-    plt.plot(val,np.exp(val),label="Exponential")
-    plt.xlabel("Range values")
-    plt.ylabel("Exponential values")
-    plt.legend()
-    plt.show()
+
+# function to generate coordinates
 
 
-n=int(input("Enter the number of plottings values: "))
-x=[]
-y=[]
-for i in range(n):
-    x1=int(input("Enter the value of x coordinate for polynomial: "))
-    x.append(x1)
-    y1=int(input("Enter the value of y coordinate for polynomial: "))
-    y.append(y1)
-degree=int(input("Enter the degree of the polynomial: "))
+def create_plot(ptype):
+	# setting the x-axis values
+	x = np.arange(-10, 10, 0.01)
+
+	# setting the y-axis values
+	if ptype == 'linear':
+		y = x
+	elif ptype == 'quadratic':
+		y = x**2
+	elif ptype == 'cubic':
+		y = x**3
+	elif ptype == 'quartic':
+		y = x**4
+
+	return (x, y)
 
 
-a=int(input("Enter the starting range for exponential graph: "))
-b=int(input("Enter the ending range for exponential graph:  "))
-diff=int(input("Enter the difference in values for exponential graph: "))
-print("Plotting all the graphs..........")
-print("..........")
-print("..........")
-print("..........")
-plotting(x=x,y=y,deg=degree,b=b,a=a,diff=diff)
+# setting a style to use
+plt.style.use('fivethirtyeight')
+
+# create a figure
+fig = plt.figure()
+
+# define subplots and their positions in figure
+plt1 = fig.add_subplot(221)
+plt2 = fig.add_subplot(222)
+plt3 = fig.add_subplot(223)
+plt4 = fig.add_subplot(224)
+
+# plotting points on each subplot
+x, y = create_plot('linear')
+plt1.plot(x, y, color='r')
+plt1.set_title('$y_1 = x$')
+
+x, y = create_plot('quadratic')
+plt2.plot(x, y, color='b')
+plt2.set_title('$y_2 = x^2$')
+
+x, y = create_plot('cubic')
+plt3.plot(x, y, color='g')
+plt3.set_title('$y_3 = x^3$')
+
+x, y = create_plot('quartic')
+plt4.plot(x, y, color='k')
+plt4.set_title('$y_4 = x^4$')
+
+# adjusting space between subplots
+fig.subplots_adjust(hspace=.5, wspace=0.5)
+
+# function to show the plot
+plt.show()
